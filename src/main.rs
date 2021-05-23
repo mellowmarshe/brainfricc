@@ -5,26 +5,23 @@ fn main() {
 
     let path = PathBuf::from(&args[1]);
 
-    // We will default to this, it prints Hello World!
-    let default = "++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.";
-
-    let code = fs::read_to_string(path).unwrap_or_else(|_| default.to_string());
+    let code = fs::read_to_string(path).expect("");
 
     brainfricc(&code);
 }
 
 fn brainfricc(code: &str) {
     // Current cell position pointer
-    let mut cellptr = 0;
+    let mut cell_ptr = 0;
     // A hashmap of the bracket pairs
     let brackets = map_brackets(code);
     // A vector of all cell values
     let mut cells: Vec<usize> = Vec::new();
     // Our current position in the code
-    let mut codeptr = 0;
+    let mut code_ptr = 0;
 
-    while codeptr < code.len() {
-        let c = code.chars().nth(codeptr).unwrap();
+    while code_ptr < code.len() {
+        let c = code.chars().nth(code_ptr).unwrap();
 
         /*
         Valid characters and what they do:
@@ -40,37 +37,37 @@ fn brainfricc(code: &str) {
         */
         match c {
             '>' => {
-                cellptr += 1;
+                cell_ptr += 1;
             }
             '<' => {
-                cellptr -= 1;
+                cell_ptr -= 1;
             }
             '+' => {
-                cells.push(cellptr);
-                cells[cellptr] = (cells[cellptr] + 1) % 256
+                cells.push(cell_ptr);
+                cells[cell_ptr] = (cells[cell_ptr] + 1) % 256
             }
             '-' => {
-                cells.push(cellptr);
-                cells[cellptr] = (cells[cellptr] - 1) % 256
+                cells.push(cell_ptr);
+                cells[cell_ptr] = (cells[cell_ptr] - 1) % 256
             }
             '[' => {
-                if cells[cellptr] == 0 {
-                    codeptr = brackets[&codeptr];
+                if cells[cell_ptr] == 0 {
+                    code_ptr = brackets[&code_ptr];
                 }
             }
             ']' => {
-                if cells[cellptr] != 0 {
-                    codeptr = brackets[&codeptr]
+                if cells[cell_ptr] != 0 {
+                    code_ptr = brackets[&code_ptr]
                 }
             }
-            ',' => cells[cellptr] = c as usize,
+            ',' => cells[cell_ptr] = c as usize,
             '.' => {
-                print!("{}", (cells[cellptr] as u8) as char)
+                print!("{}", (cells[cell_ptr] as u8) as char)
             }
             _ => {}
         }
 
-        codeptr += 1;
+        code_ptr += 1;
     }
 }
 

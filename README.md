@@ -5,7 +5,7 @@ A [Brainfuck](https://en.wikipedia.org/wiki/Brainfuck) interpreter written in Ru
 To use do:
 
 ```
-# this will read the file and run the brainfuck in it. if none passed it will run a hello world brainfuck
+# this will read the file and run the brainfuck in it
 $ brainfricc [file]
 ```
 
