@@ -3,7 +3,7 @@ use std::{collections::HashMap, env, fs, path::PathBuf};
 fn main() {
     let args: Vec<String> = env::args().collect();
 
-    let path = PathBuf::from(&args[1]);
+    let path = PathBuf::from(&args.get(1).expect("No file passed."));
 
     let code = fs::read_to_string(path).expect("");
 
