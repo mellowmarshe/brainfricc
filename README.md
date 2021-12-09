@@ -1,7 +1,11 @@
-## Brainfricc
+<div align="center">
+    <h1>🧠 Brainfricc</h1>
+  A <a href="https://en.wikipedia.org/wiki/Brainfuck">Brainfuck</a> interpreter written in Rust
+    <br>
+    <br>
+</div>
 
-A [Brainfuck](https://en.wikipedia.org/wiki/Brainfuck) interpreter written in Rust.
-
+# Usage
 To use do:
 
 ```
@@ -10,3 +14,7 @@ $ brainfricc [file]
 ```
 
 Theres an examples directory for example programs.
+
+
+# License
+MIT
